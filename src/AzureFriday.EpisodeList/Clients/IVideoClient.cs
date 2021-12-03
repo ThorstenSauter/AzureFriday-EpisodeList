@@ -9,5 +9,5 @@ public interface IVideoClient
     const int MaxBatchSize = 52;
 
     [Get("/entries/batch")]
-    Task<ApiResponse<IEnumerable<VideoEntry>>> GetVideoData([Query(CollectionFormat.Csv)] IEnumerable<Guid> ids);
+    Task<List<VideoEntry>> GetVideoData([Query(CollectionFormat.Csv)] IEnumerable<Guid> ids);
 }

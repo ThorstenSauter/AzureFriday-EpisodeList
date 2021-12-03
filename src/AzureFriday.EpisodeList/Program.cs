@@ -20,6 +20,4 @@ app.MapGet("/", async (IShowClient showClient, IVideoClient episodeClient) =>
     return await episodeClient.GetVideoDataForEpisodesAsync(episodes);
 });
 
-app.UseRouting();
-
 app.Run();

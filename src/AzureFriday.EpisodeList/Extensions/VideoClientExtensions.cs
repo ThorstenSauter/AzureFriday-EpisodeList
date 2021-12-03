@@ -13,12 +13,12 @@ public static class VideoClientExtensions
         var getEntriesTasks = episodes.Keys
             .Chunk(IVideoClient.MaxBatchSize)
             .Select(videoClient.GetVideoData)
-            .ToList();
+            .ToArray();
 
         var entries = await Task.WhenAll(getEntriesTasks);
-        foreach (var entry in entries)
+        foreach (var videoEntries in entries)
         {
-            result.AddRange(entry.Content!.Select(entryData => new AzureFridayEpisode(episodes[entryData.Entry.Id], entryData)));
+            result.AddRange(videoEntries.Select(entryData => new AzureFridayEpisode(episodes[entryData.Entry.Id], entryData)));
         }
 
         return result;

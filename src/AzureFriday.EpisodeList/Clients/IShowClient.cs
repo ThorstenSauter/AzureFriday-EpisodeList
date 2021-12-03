@@ -9,5 +9,5 @@ public interface IShowClient
     const int MaxPageSize = 30;
 
     [Get("/episodes?page={pageNumber}&pageSize={pageSize}&orderBy=uploaddate desc")]
-    Task<ApiResponse<EpisodePage>> GetEpisodesForPage(int pageNumber, int pageSize = 30);
+    Task<EpisodePage> GetEpisodesForPage(int pageNumber, int pageSize = 30);
 }

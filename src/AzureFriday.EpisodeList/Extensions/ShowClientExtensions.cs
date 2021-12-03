@@ -1,6 +1,5 @@
 ﻿using AzureFriday.EpisodeList.ApiResponses.Show;
 using AzureFriday.EpisodeList.Clients;
-using Refit;
 
 namespace AzureFriday.EpisodeList.Extensions;
 
@@ -8,32 +7,24 @@ public static class ShowClientExtensions
 {
     public static async Task<IReadOnlyDictionary<Guid, Episode>> GetAllEpisodesAsync(this IShowClient showClient)
     {
-        var totalEpisodeCount = (await showClient.GetEpisodesForPage(0, 1)).Content?.TotalCount ?? throw new("Could not retrieve episode count");
-        var episodes = new Dictionary<Guid, Episode>();
-        var maxPageNumber = GetMaxPageNumber(totalEpisodeCount);
-
-        var getEpisodePageTasks = new List<Task<ApiResponse<EpisodePage>>>();
-
-        for (var i = 0; i <= maxPageNumber; i++)
-        {
-            getEpisodePageTasks.Add(showClient.GetEpisodesForPage(i));
-        }
+        var totalEpisodeCount = await GetTotalEpisodeCount(showClient);
+        var numberOfPages = GetNumberOfPages(totalEpisodeCount);
+        var getEpisodePageTasks = Enumerable.Range(0, numberOfPages)
+            .Select(pageNumber => showClient.GetEpisodesForPage(pageNumber))
+            .ToArray();
 
         var pages = await Task.WhenAll(getEpisodePageTasks);
-        foreach (var page in pages)
-        {
-            foreach (var episode in page.Content!.Episodes)
-            {
-                episodes[episode.EntryId] = episode;
-            }
-        }
-
-        return episodes;
+        return pages
+            .SelectMany(x => x.Episodes)
+            .ToDictionary(e => e.EntryId, e => e);
     }
 
-    private static int GetMaxPageNumber(int totalEpisodeCount)
+    private static async Task<int> GetTotalEpisodeCount(IShowClient showClient) =>
+        (await showClient.GetEpisodesForPage(0, 1)).TotalCount;
+
+    private static int GetNumberOfPages(int totalEpisodeCount)
     {
         var pages = totalEpisodeCount / IShowClient.MaxPageSize;
-        return totalEpisodeCount % IShowClient.MaxPageSize == 0 ? pages - 1 : pages;
+        return totalEpisodeCount % IShowClient.MaxPageSize == 0 ? pages : pages + 1;
     }
 }
