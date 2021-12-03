@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.31911.260
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureFriday.EpisodeList", "src\AzureFriday.EpisodeList\AzureFriday.EpisodeList.csproj", "{06876765-0B8B-49B4-84D1-6D228334BB06}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{386466C0-5649-48EB-A660-8C8498F84FCD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3D146340-A97D-4D26-93CB-9A2EFE5EF6E0}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06876765-0B8B-49B4-84D1-6D228334BB06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06876765-0B8B-49B4-84D1-6D228334BB06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06876765-0B8B-49B4-84D1-6D228334BB06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06876765-0B8B-49B4-84D1-6D228334BB06}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{06876765-0B8B-49B4-84D1-6D228334BB06} = {386466C0-5649-48EB-A660-8C8498F84FCD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61DB085D-9B8E-4844-B748-A3EEC3DFD3B1}
+	EndGlobalSection
+EndGlobal
